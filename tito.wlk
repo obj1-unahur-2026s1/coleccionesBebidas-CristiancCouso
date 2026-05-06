@@ -1,4 +1,4 @@
-import bebidas.*
+  import bebidas.*
 object tito {
   var sustanciaActual = whisky
   var dosisConsumida = 0
@@ -14,5 +14,4 @@ object tito {
     sustanciaActual = bebida
     dosisConsumida = cantidad
   }
-  
 }

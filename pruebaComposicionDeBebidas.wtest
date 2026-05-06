@@ -1,0 +1,46 @@
+import tito.*
+import bebidas.*
+
+describe "Tests de composicion de bebidas" {
+  test "Agregar nuevos ingredientes al licuado luego que forme parte del coctel y afecta al rendimiento que otorta el coctel" {
+    coctel.agregarBebida(licuadoDeFrutas)
+    coctel.agregarBebida(whisky)
+    coctel.agregarBebida(terere)
+    tito.consumir(30, coctel)
+    tito.velocidad()
+    licuadoDeFrutas.agregarNutrientes(8)
+    tito.velocidad()
+    assert.equals(1.00072, tito.velocidad())
+  }
+
+  test "Puede el coctel incluir a la vez whisky y agua saborizada con whisky" {
+    coctel.agregarBebida(whisky)
+    
+    aguaSaborizada.cambiarOtraBebida(whisky)
+    coctel.agregarBebida(aguaSaborizada)
+    
+    tito.consumir(60, coctel)
+    
+    assert.equals(0.43134, tito.velocidad())
+  }
+
+    test "Puede el coctel incluir el agua saborizada con coctel" {
+    coctel.agregarBebida(whisky)
+    coctel.agregarBebida(terere)
+    aguaSaborizada.cambiarOtraBebida(coctel)
+    coctel.agregarBebida(aguaSaborizada)
+    tito.consumir(80, coctel)
+  }
+
+  test "Agregar un nutriente al licuado que forma parte de un coctel y ver si modifica el rendimiento que le otorga a tito"{
+    coctel.agregarBebida(licuadoDeFrutas)
+    coctel.agregarBebida(whisky)
+    coctel.agregarBebida(terere)
+    tito.consumir(110, coctel)
+    var velocidadInicial = tito.velocidad()
+    licuadoDeFrutas.agregarNutrientes(20)
+    var velocidadFinal = tito.velocidad()
+    assert.equals(true, velocidadInicial != velocidadFinal)
+  }
+
+}
